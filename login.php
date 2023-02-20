@@ -25,6 +25,7 @@ session_start();
 <body>
 
   <?php
+    $navigate = true;
     if($_SERVER["REQUEST_METHOD"]=="POST"){
       $getname = $_POST['username'];
       $getpwd = $_POST['userpwd'];
@@ -43,6 +44,10 @@ session_start();
           $status_pwd=true;
         }
       }
+      $navigate = false;
+    }
+    if($navigate && $_SESSION['login_user']==true){
+      header("location: index.php");
     }
   ?>
 
