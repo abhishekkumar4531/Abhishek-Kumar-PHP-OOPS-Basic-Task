@@ -1,6 +1,18 @@
 <?php
+//start the session.
 session_start();
+
+//'RootClass' is a PHP class which is generate response on each request which is comming from other PHP files.
 class RootClass{
+	/**
+	 * function loadImage($imgFile)
+	 *
+	 * @param [type] $imgFile:This is array type variable and holds the information about image.
+	 * First access all the image property and moved to a folder where image data will be store.
+	 * After storing the image file then display using <img> tag.
+	 *
+	 * @return void
+	 */
 	function loadImage($imgFile){
 		//if(isset($_FILES['user_img'])){
 			/*echo "Welcome";
@@ -20,6 +32,16 @@ class RootClass{
 		//}
 	}
 
+	/**
+	 * function loadSubject($subValue)
+	 *
+	 * @param [type] $subValue:This is a string type variable which holds all the subject name and marks with '|'.
+	 * At first we have to divide the $subValue string with respect to line using explode method and then
+	 * again divide each divided string with respect to '|' and store the sub data in associative array format like array[sub_name]=sub_marks.
+	 * After these step create a dynamic table and display the data in table format.
+	 *
+	 * @return void
+	 */
 	function loadSubject($subValue){
 		//if(isset($_POST['sub_details'])){
 			$sub_info = Array();
@@ -47,6 +69,17 @@ class RootClass{
 		//}
 	}
 
+
+	/**
+	 * function checkEmail($user_email)
+	 *
+	 * @param [type] $user_email:This is a string type variable which holds email of user
+	 * Here email is verified with the help of 'apilayer' API.
+	 * is email valid or not for this we check two condition first one is 'format_valid' and another is 'smtp_check' :
+	 * If both are true then email is valid otherwise invalid.
+	 *
+	 * @return boolean
+	 */
   function checkEmail($user_email){
     $curl = curl_init();
 
@@ -74,6 +107,32 @@ class RootClass{
       return true;
     }else{
       return false;
+    }
+  }
+
+  /**
+   * function getUrl($qVal)
+   *
+   * @param [type] $qVal is a int type varaible which hold the value which is getting from url.
+   * According to $qVal value page will be navigate.
+   *
+   * @return void
+   */
+  function getUrl($qVal){
+    if($qVal==1){
+      header("location: validForm/task1.php");
+    }else if($qVal==2){
+      header("location: imageForm/task2.php");
+    }else if($qVal==3){
+      header("location: subForm/task3.php");
+    }else if($qVal==4){
+      header("location: phoneForm/task4.php");
+    }else if($qVal==5){
+      header("location: emailForm/task5.php");
+    }else if($qVal==6){
+      header("location: printForm/task6.php");
+    }else if($qVal==7){
+      header("location: index.php");
     }
   }
 }
