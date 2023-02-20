@@ -13,8 +13,8 @@ class RootClass{
 			$img_tmp = $imgFile['tmp_name'];
 			$img_type = $imgFile['type'];
 
-			move_uploaded_file($img_tmp, "uploaded/".$img_name);
-			echo '<img src="uploaded/'.$img_name.'">';
+			move_uploaded_file($img_tmp, "../uploaded/".$img_name);
+			echo '<img src="../uploaded/'.$img_name.'">';
 
       $_SESSION['user_image'] = "uploaded/".$img_name;
 		//}
