@@ -7,7 +7,7 @@ class RootClass{
 	/**
 	 * function loadImage($imgFile)
 	 *
-	 * @param [type] $imgFile:This is array type variable and holds the information about image.
+	 * @param [Array type] $imgFile:This is array type variable and holds the information about image.
 	 * First access all the image property and moved to a folder where image data will be store.
 	 * After storing the image file then display using <img> tag.
 	 *
@@ -35,7 +35,7 @@ class RootClass{
 	/**
 	 * function loadSubject($subValue)
 	 *
-	 * @param [type] $subValue:This is a string type variable which holds all the subject name and marks with '|'.
+	 * @param [String] $subValue:This is a string type variable which holds all the subject name and marks with '|'.
 	 * At first we have to divide the $subValue string with respect to line using explode method and then
 	 * again divide each divided string with respect to '|' and store the sub data in associative array format like array[sub_name]=sub_marks.
 	 * After these step create a dynamic table and display the data in table format.
@@ -73,7 +73,7 @@ class RootClass{
 	/**
 	 * function checkEmail($user_email)
 	 *
-	 * @param [type] $user_email:This is a string type variable which holds email of user
+	 * @param [String] $user_email:This is a string type variable which holds email of user
 	 * Here email is verified with the help of 'apilayer' API.
 	 * is email valid or not for this we check two condition first one is 'format_valid' and another is 'smtp_check' :
 	 * If both are true then email is valid otherwise invalid.
@@ -113,7 +113,7 @@ class RootClass{
   /**
    * function getUrl($qVal)
    *
-   * @param [type] $qVal is a int type varaible which hold the value which is getting from url.
+   * @param [Int] $qVal is a int type varaible which hold the value which is getting from url.
    * According to $qVal value page will be navigate.
    *
    * @return void
