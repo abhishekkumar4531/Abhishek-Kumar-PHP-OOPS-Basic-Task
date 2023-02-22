@@ -25,8 +25,12 @@ class RootClass{
       $img_tmp = $imgFile['tmp_name'];
       $img_type = $imgFile['type'];
 
-      move_uploaded_file($img_tmp, "../uploaded/".$this->img_name);
-      echo '<img src="../uploaded/'.$this->img_name.'">';
+      if($img_type == "image/png" || $img_type == "image/jpeg" || $img_type == "image/jpg"){
+        move_uploaded_file($img_tmp, "../uploaded/".$this->img_name);
+        echo '<img src="../uploaded/'.$this->img_name.'">';
+      }else{
+        echo "Check your image file type!!!";
+      }
     //}
   }
 
@@ -47,12 +51,15 @@ class RootClass{
     //if(isset($_POST['sub_details'])){
       $line_change = explode("\n", $subValue);
       foreach($line_change as $info){
-        $line = explode("|", $info);
-        if($line[0]!=""){
-          if($line[1]>=0 && $line[1]<=100){
-            $this->sub_info[$line[0]] = $line[1];
-          }else{
-            $this->sub_info[$line[0]] = "NAN";
+        if(strlen($info) >= 3){
+          $line = explode("|", $info);
+          if($line[0]!=""){
+            if($line[1]>=0 && $line[1]<=100){
+              $this->sub_info[$line[0]] = $line[1];
+            }
+            else{
+              $this->sub_info[$line[0]] = "NAN";
+            }
           }
         }
       }
@@ -60,8 +67,10 @@ class RootClass{
       echo "<table border='1'>";
       echo "<tr><th>Subjects</th><th>Marks</th></tr>";
       foreach($this->sub_info as $sub_name => $sub_marks){
-        echo "<tr><td>". $sub_name ."</td>";
-        echo "<td>". $sub_marks . "</td></tr>";
+        if(strlen($sub_name) != 0 && strlen($sub_marks) != 0){
+          echo "<tr><td>". $sub_name ."</td>";
+          echo "<td>". $sub_marks . "</td></tr>";
+        }
       }
       echo "</table>";
     //}
@@ -169,10 +178,12 @@ class RootClass{
         $this->status_name=true;
         $this->status_pwd=true;
         return false;
-      }else if($username!="Abhi"){
+      }
+      else if($username!="Abhi"){
         $this->status_name=true;
         return false;
-      }else if($userpwd!="abhi@45"){
+      }
+      else if($userpwd!="abhi@45"){
         $this->status_pwd=true;
         return false;
       }

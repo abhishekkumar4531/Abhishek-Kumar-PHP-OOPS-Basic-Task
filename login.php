@@ -13,13 +13,13 @@
      font-family: Arial;
      margin: 0 auto;
      width: 1200px;
-  }
-  span{
-    color: red;
-  }
-  input{
-    padding: 5px;
-  }
+    }
+    span{
+      color: red;
+    }
+    input{
+      padding: 5px;
+    }
   </style>
 </head>
 <body>
@@ -28,26 +28,20 @@
     if(isset($_SESSION['login_user'])){
       header("location: index.php");
     }
-    require("rootClass.php");
-    $loginObj = new RootClass();
 
-    if($_SERVER["REQUEST_METHOD"]=="POST"){
-      if($loginObj->getLogin($_POST['username'], $_POST['userpwd'])){
-        $_SESSION['login_user'] = $loginObj->getname;
-        header("location: phoneForm/task4.php");
-      }
-    }
+    //require("rootClass.php");
+    //$loginObj = new RootClass();
   ?>
 
   <h1>Login-Page</h1>
 
-  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+  <form action="logged-in.php" method="post">
 
     <label for="username">Enter User-Name</label><br>
-    <input type="text" name="username" placeholder="Enter : Abhi" value="<?php echo $loginObj->getname; ?>">
+    <input type="text" name="username" placeholder="Enter : Abhi" value="<?php if(isset($_SESSION['logged_user'])){echo $_SESSION['logged_user'];} ?>" required>
     <span>
       <?php
-        if($loginObj->status_name){
+        if(isset($_SESSION['logged_nstatus']) && $_SESSION['logged_nstatus']){
           echo "Enter valid user-name : Abhi";
         }
       ?>
@@ -55,10 +49,10 @@
     <br><br>
 
     <label for="username">Enter User-Password</label><br>
-    <input type="text" name="userpwd" placeholder="Enter:abhi@45" value="<?php echo $loginObj->getpwd; ?>">
+    <input type="text" name="userpwd" placeholder="Enter:abhi@45" value="<?php if(isset($_SESSION['logged_pwd'])){echo $_SESSION['logged_pwd'];} ?>" required>
     <span>
       <?php
-        if($loginObj->status_pwd){
+        if(isset($_SESSION['logged_pstatus']) && $_SESSION['logged_pstatus']){
           echo "Enter valid user-pwd:abhi@45";
         }
       ?>

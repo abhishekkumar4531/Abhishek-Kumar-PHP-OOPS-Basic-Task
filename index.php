@@ -58,11 +58,12 @@ session_start();
 
   <?php
   if($status){
-  echo "<p class='col-green'>". $_SESSION['login_user'] ." thanks for visiting..</p>";
-  echo "<a href='logout.php'>Click here for logout</a>";
-  }else{
-  echo "<p class='col-red'>*you have to log-in before visiting on tasks</p>";
-  echo "<a href='login.php'>Click here for login</a>";
+    echo "<p class='col-green'>". $_SESSION['login_user'] ." thanks for visiting..</p>";
+    echo "<a href='logout.php'>Click here for logout</a>";
+  }
+  else{
+    echo "<p class='col-red'>*you have to log-in before visiting on tasks</p>";
+    echo "<a href='login.php'>Click here for login</a>";
   }
   ?>
 
