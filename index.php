@@ -38,21 +38,23 @@ session_start();
   global $status;
   //If $status = false that's mean user is log-out and true means log-in.
   $status=false;
-  $user_profile = $_SESSION['login_user'];
-  if($user_profile==true){
+  if(isset($_SESSION['login_user'])){
   $status=true;
   }else{
   $status=false;
   }
 
-  //Create the object for RootClass.
-  $obj_index = new RootClass();
+  if(isset($_GET['q'])){
+    //Create the object for RootClass.
+    $obj_index = new RootClass();
 
-  //Calling the getUrl function with parameter of GET value from url.
-  $obj_index->getUrl($_GET['q']);
+    //Calling the getUrl function with parameter of GET value from url.
+    $obj_index->getUrl($_GET['q']);
+  }
 
   ?>
   <h1>These all are basic PHP task</h1>
+
   <?php
   if($status){
   echo "<p class='col-green'>". $_SESSION['login_user'] ." thanks for visiting..</p>";
@@ -62,6 +64,7 @@ session_start();
   echo "<a href='login.php'>Click here for login</a>";
   }
   ?>
+
   <ul>
   <li><a href="validForm/task1.php">Task1</a></li>
   <li><a href="imageForm/task2.php">Task2</a></li>

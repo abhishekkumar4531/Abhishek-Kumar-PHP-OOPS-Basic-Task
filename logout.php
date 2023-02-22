@@ -2,7 +2,7 @@
 session_start();
 
 session_unset();
+session_destroy();
 
-echo "You logged out";
 header("location: login.php");
 ?>

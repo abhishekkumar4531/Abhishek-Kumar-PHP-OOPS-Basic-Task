@@ -45,11 +45,16 @@ session_start();
   ?>
   <form action="subject.php" method="post" enctype="multipart/form-data">
     <h1>Student log-in page</h1>
+
     Enter your first-name : <input type="text" name="fname" id="fname" onblur="checkFname()" required><span id="invalid_fname"></span><br><br>
+
     Enter your last-name : <input type="text" name="lname" id="lname" onblur="checkLname()" required><span id="invalid_lname"></span><br><br>
+
     Upload your img : <input type="file" name="user_img" id="user_img" required><br><br>
+
     Enter your subject-name and subject-marks in below text-area : <br>
     <textarea name="sub_details" id="sub_details" cols="30" rows="5" placeholder="Enter like Sub_Name|Sub_Marks.." required></textarea><br><br>
+
     <button id="submitBtn">Submit</button>
   </form>
 </body>

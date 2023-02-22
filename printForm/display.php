@@ -60,6 +60,7 @@ session_start();
         $_SESSION['user_phone'] = $_POST['phone'];
         echo "<div>";
         $task5_obj->loadImage($_FILES['user_img']);
+        $_SESSION['user_image'] = "../uploaded/".$task5_obj->img_name;
         echo "<h3>". $_POST['fname'] ." ". $_POST['lname'] ."</h3>";
         echo "<h3>Phone's Number : ". $_POST['phone'] ."</h3>";
         echo "<h3>Verified-email : ". $_POST['user_email'] ."</h3>";
@@ -67,6 +68,7 @@ session_start();
       }
       if(isset($_POST['sub_details'])){
         $task5_obj->loadSubject($_POST['sub_details']);
+        $_SESSION['sub_data'] = $task5_obj->sub_info;
       }
     }else{
       $status = false;

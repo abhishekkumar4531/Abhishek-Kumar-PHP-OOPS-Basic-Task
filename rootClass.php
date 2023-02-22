@@ -1,18 +1,18 @@
 <?php
-//start the session.
-session_start();
 
 //'RootClass' is a PHP class which is generate response on each request which is comming from other PHP files.
 class RootClass{
   /**
-   * function loadImage($imgFile)
-   *
-   * @param [Array type] $imgFile:This is array type variable and holds the information about image.
-   * First access all the image property and moved to a folder where image data will be store.
-   * After storing the image file then display using <img> tag.
-   *
-   * @return void
-   */
+  * function loadImage($imgFile)
+  *
+  * @param [Array] $imgFile:This is array type variable and holds the information about image.
+  * First access all the image property and moved to a folder where image data will be store.
+  * After storing the image file then display using <img> tag.
+  *
+  * @return void
+  */
+  //This is a string type which will be store image name.
+  public $img_name;
   function loadImage($imgFile){
     //if(isset($_FILES['user_img'])){
       /*echo "Welcome";
@@ -20,48 +20,46 @@ class RootClass{
       print_r ($_FILES);
       echo "</pre>";*/
 
-      $img_name = $imgFile['name'];
+      $this->img_name = $imgFile['name'];
       $img_size = $imgFile['size'];
       $img_tmp = $imgFile['tmp_name'];
       $img_type = $imgFile['type'];
 
-      move_uploaded_file($img_tmp, "../uploaded/".$img_name);
-      echo '<img src="../uploaded/'.$img_name.'">';
-
-      $_SESSION['user_image'] = "../uploaded/".$img_name;
+      move_uploaded_file($img_tmp, "../uploaded/".$this->img_name);
+      echo '<img src="../uploaded/'.$this->img_name.'">';
     //}
   }
 
+
   /**
-   * function loadSubject($subValue)
-   *
-   * @param [String] $subValue:This is a string type variable which holds all the subject name and marks with '|'.
-   * At first we have to divide the $subValue string with respect to line using explode method and then
-   * again divide each divided string with respect to '|' and store the sub data in associative array format like array[sub_name]=sub_marks.
-   * After these step create a dynamic table and display the data in table format.
-   *
-   * @return void
-   */
+  * function loadSubject($subValue)
+  *
+  * @param [String] $subValue:This is a string type variable which holds all the subject name and marks with '|'.
+  * At first we have to divide the $subValue string with respect to line using explode method and then
+  * again divide each divided string with respect to '|' and store the sub data in associative array format like array[sub_name]=sub_marks.
+  * After these step create a dynamic table and display the data in table format.
+  *
+  * @return void
+  */
+  //This is an associative array type which store subject name as key and subject marks as value.
+  public $sub_info = Array();
   function loadSubject($subValue){
     //if(isset($_POST['sub_details'])){
-      $sub_info = Array();
       $line_change = explode("\n", $subValue);
       foreach($line_change as $info){
         $line = explode("|", $info);
         if($line[0]!=""){
           if($line[1]>=0 && $line[1]<=100){
-            $sub_info[$line[0]] = $line[1];
+            $this->sub_info[$line[0]] = $line[1];
           }else{
-            $sub_info[$line[0]] = "NAN";
+            $this->sub_info[$line[0]] = "NAN";
           }
         }
       }
 
-      $_SESSION['sub_data'] = $sub_info;
-
       echo "<table border='1'>";
       echo "<tr><th>Subjects</th><th>Marks</th></tr>";
-      foreach($sub_info as $sub_name => $sub_marks){
+      foreach($this->sub_info as $sub_name => $sub_marks){
         echo "<tr><td>". $sub_name ."</td>";
         echo "<td>". $sub_marks . "</td></tr>";
       }
@@ -71,15 +69,15 @@ class RootClass{
 
 
   /**
-   * function checkEmail($user_email)
-   *
-   * @param [String] $user_email:This is a string type variable which holds email of user
-   * Here email is verified with the help of 'apilayer' API.
-   * is email valid or not for this we check two condition first one is 'format_valid' and another is 'smtp_check' :
-   * If both are true then email is valid otherwise invalid.
-   *
-   * @return boolean
-   */
+  * function checkEmail($user_email)
+  *
+  * @param [String] $user_email:This is a string type variable which holds email of user
+  * Here email is verified with the help of 'apilayer' API.
+  * is email valid or not for this we check two condition first one is 'format_valid' and another is 'smtp_check' :
+  * If both are true then email is valid otherwise invalid.
+  *
+  * @return boolean
+  */
   function checkEmail($user_email){
     $curl = curl_init();
 
@@ -110,14 +108,15 @@ class RootClass{
     }
   }
 
+
   /**
-   * function getUrl($qVal)
-   *
-   * @param [Int] $qVal is a int type varaible which hold the value which is getting from url.
-   * According to $qVal value page will be navigate.
-   *
-   * @return void
-   */
+  * function getUrl($qVal)
+  *
+  * @param [Int] $qVal is a int type varaible which hold the value which is getting from url.
+  * According to $qVal value page will be navigate.
+  *
+  * @return void
+  */
   function getUrl($qVal){
     if($qVal==1){
       header("location: validForm/task1.php");
@@ -133,6 +132,44 @@ class RootClass{
       header("location: printForm/task6.php");
     }else if($qVal==7){
       header("location: index.php");
+    }
+  }
+
+  //Login user-name
+  public $getname;
+  //Login user-password
+  public $getpwd;
+  //Login user-name error message
+  public $status_name=false;
+  //Login user-password error message
+  public $status_pwd=false;
+
+  /**
+  * function getLogin($username, $userpwd)
+  *
+  * @param [string] $username : This contains the user-name.
+  * @param [string] $userpwd : It contains user-password.
+  * This function first check user-name and password is valid or not, if valid then return true otherwise return false.
+  *
+  * @return boolean
+  */
+  function getLogin($username, $userpwd){
+    $this->getname = $username;
+    $this->getpwd = $userpwd;
+    if($username === "Abhi" && $userpwd === "abhi@45"){
+      return true;
+    }else{
+      if($username!="Abhi" && $userpwd!="abhi@45"){
+        $this->status_name=true;
+        $this->status_pwd=true;
+        return false;
+      }else if($username!="Abhi"){
+        $this->status_name=true;
+        return false;
+      }else if($userpwd!="abhi@45"){
+        $this->status_pwd=true;
+        return false;
+      }
     }
   }
 }

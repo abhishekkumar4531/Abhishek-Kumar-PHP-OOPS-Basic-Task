@@ -45,9 +45,13 @@ session_start();
   ?>
   <form action="image.php" method="post" enctype="multipart/form-data">
     <h1>User log-in page</h1>
+
     Enter your first-name : <input type="text" name="fname" id="fname" onblur="checkFname()" required><span id="invalid_fname"></span><br><br>
+
     Enter your last-name : <input type="text" name="lname" id="lname" onblur="checkLname()" required><span id="invalid_lname"></span><br><br>
+
     Upload your img : <input type="file" name="user_img" id="user_img" required><br><br>
+
     <button id="submitBtn">Submit</button>
   </form>
 </body>
