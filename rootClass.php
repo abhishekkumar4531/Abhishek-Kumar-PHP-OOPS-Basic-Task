@@ -120,17 +120,23 @@ class RootClass{
   function getUrl($qVal){
     if($qVal==1){
       header("location: validForm/task1.php");
-    }else if($qVal==2){
+    }
+    else if($qVal==2){
       header("location: imageForm/task2.php");
-    }else if($qVal==3){
+    }
+    else if($qVal==3){
       header("location: subForm/task3.php");
-    }else if($qVal==4){
+    }
+    else if($qVal==4){
       header("location: phoneForm/task4.php");
-    }else if($qVal==5){
+    }
+    else if($qVal==5){
       header("location: emailForm/task5.php");
-    }else if($qVal==6){
+    }
+    else if($qVal==6){
       header("location: printForm/task6.php");
-    }else if($qVal==7){
+    }
+    else if($qVal==7){
       header("location: index.php");
     }
   }

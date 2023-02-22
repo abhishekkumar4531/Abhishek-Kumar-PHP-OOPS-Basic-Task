@@ -39,9 +39,10 @@ session_start();
   //If $status = false that's mean user is log-out and true means log-in.
   $status=false;
   if(isset($_SESSION['login_user'])){
-  $status=true;
-  }else{
-  $status=false;
+    $status=true;
+  }
+  else{
+    $status=false;
   }
 
   if(isset($_GET['q'])){
