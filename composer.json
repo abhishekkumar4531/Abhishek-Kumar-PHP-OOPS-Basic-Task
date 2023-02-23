@@ -1,5 +1,6 @@
 {
     "require": {
-        "fpdf/fpdf": "^1.85"
+        "fpdf/fpdf": "^1.85",
+        "guzzlehttp/guzzle": "^7.5"
     }
 }
