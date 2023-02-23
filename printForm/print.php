@@ -1,8 +1,10 @@
 <?php
   session_start();
-  require('fpdf185/fpdf.php');
+  require "../vendor/autoload.php";
 
-  class PDF extends FPDF
+  use Fpdf\Fpdf;
+
+  class PDF extends Fpdf
   {
   function Header()
   {
