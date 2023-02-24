@@ -1,4 +1,8 @@
 <?php
+//vendor is folder realted to composer and here used for 'Guzzle'
+require("vendor/autoload.php");
+//Client is a class which coming from GuzzleHttp and Guzzle used it for email validation.
+use GuzzleHttp\Client;
 
 //'RootClass' is a PHP class which is generate response on each request which is comming from other PHP files.
 class RootClass{
@@ -88,13 +92,35 @@ class RootClass{
   * @return boolean
   */
   function checkEmail($user_email){
-    $curl = curl_init();
 
+    //Email verification using 'Guzzle'
+    $client = new Client([
+    'base_uri' => 'https://api.apilayer.com/'
+    ]);
+
+    $response = $client->request('GET', 'email_verification/check?email='. $user_email,
+    ['headers' => [
+    'Content-Type' => 'text/plain',
+    'apikey' => '3ti1A2XST7POC3bhKnPwNaCYsRSfLsOf']
+    ]);
+
+    $verified_data = $response->getBody();
+
+    $check_validity= json_decode($verified_data, true);
+    if($check_validity['format_valid'] && $check_validity['smtp_check']){
+      return true;
+    }
+    else{
+      return false;
+    }
+
+    //Email verification using 'cURL'
+    /*$curl = curl_init();
     curl_setopt_array($curl, array(
     CURLOPT_URL => "https://api.apilayer.com/email_verification/check?email=$user_email",
     CURLOPT_HTTPHEADER => array(
-        "Content-Type: text/plain",
-        "apikey: 3ti1A2XST7POC3bhKnPwNaCYsRSfLsOf"
+    "Content-Type: text/plain",
+    "apikey: 3ti1A2XST7POC3bhKnPwNaCYsRSfLsOf"
     ),
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
@@ -104,17 +130,15 @@ class RootClass{
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "GET"
     ));
-
     $response = curl_exec($curl);
-
     curl_close($curl);
-
     $check_validity= json_decode($response, true);
     if($check_validity['format_valid'] && $check_validity['smtp_check']){
       return true;
-    }else{
-      return false;
     }
+    else{
+      return false;
+    }*/
   }
 
 

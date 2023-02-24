@@ -1,6 +1,7 @@
 {
     "require": {
         "fpdf/fpdf": "^1.85",
-        "guzzlehttp/guzzle": "^7.5"
+        "guzzlehttp/guzzle": "^7.5",
+        "php-http/promise": "^1.1"
     }
 }
