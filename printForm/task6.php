@@ -48,7 +48,7 @@ session_start();
   <?php
   $user_profile = $_SESSION['login_user'];
   if($user_profile==false){
-    header("location: ../login.php");
+    header("location: ../login/login.php");
   }
   ?>
   <form action="display.php" method="post" enctype="multipart/form-data">

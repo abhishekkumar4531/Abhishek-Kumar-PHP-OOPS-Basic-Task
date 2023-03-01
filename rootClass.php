@@ -196,8 +196,8 @@ class RootClass{
     $this->getname = $username;
     $this->getpwd = $userpwd;
 
-    $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'user');
-    $sql = "SELECT * FROM users";
+    $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'User_DB');
+    $sql = "SELECT * FROM User";
 
     $result = $conn->query($sql);
 
@@ -242,6 +242,67 @@ class RootClass{
         return false;
       }
     }*/
+  }
+
+  function getRegister($username, $userpwd, $usermobile, $useremail){
+    $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'User_DB');
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO User (userName, userPwd, userMobile, userEmail)
+    VALUES ('$username', '$userpwd', '$usermobile', '$useremail')";
+
+    if ($conn->query($sql) === TRUE) {
+      //echo "New record created successfully";
+      return true;
+    } else {
+      //echo "Error: " . $sql . "<br>" . $conn->error;
+      return false;
+    }
+
+    $conn->close();
+  }
+
+  function forgotPwd($name, $cpwd, $newpwd){
+    $status = false;
+    $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'User_DB');
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+
+    $get = "SELECT * FROM User";
+    $result = $conn->query($get);
+
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+        if($name === $row["userName"] && $cpwd === $row["userPwd"]){
+          $status = true;
+          break;
+        }
+      }
+      //$status = false;
+    }
+    else {
+      $status =  false;
+    }
+    echo "<br>". $status ."<br>";
+    if($status){
+      $post = "UPDATE User SET userPwd = '$newpwd' WHERE userName = '$name'";
+      if ($conn->query($post) === TRUE) {
+        //echo "Record updated successfully";
+        return true;
+      }
+      else {
+        //echo "Error updating record: " . $conn->error;
+        return false;
+      }
+    }
+    else{
+      //echo "Error!!!";
+      return false;
+    }
+    $conn->close();
   }
 }
 ?>

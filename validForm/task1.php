@@ -33,7 +33,7 @@
     require("taskClass.php");
     $user_profile = $_SESSION['login_user'];
     if(!$user_profile){
-      header("location: ../login.php");
+      header("location: ../login/login.php");
     }
 
     $obj = new FORMS();
