@@ -195,7 +195,37 @@ class RootClass{
   function getLogin($username, $userpwd){
     $this->getname = $username;
     $this->getpwd = $userpwd;
-    if($username === "Abhi" && $userpwd === "abhi@45"){
+
+    $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'user');
+    $sql = "SELECT * FROM users";
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+        if($username === $row["userName"] && $userpwd === $row["userPwd"]){
+          return true;
+        }
+        else if($username === $row["userName"]){
+          $this->status_pwd = true;
+          return false;
+        }
+        else if($userpwd === $row["userPwd"]){
+          $this->status_name = true;
+          return false;
+        }
+      }
+      $this->status_name = true;
+      $this->status_pwd = true;
+      return false;
+    }
+    else {
+      return false;
+      $this->status_name = true;
+      $this->status_pwd = true;
+    }
+    $conn->close();
+    /*if($username === "Abhi" && $userpwd === "abhi@45"){
       return true;
     }else{
       if($username!="Abhi" && $userpwd!="abhi@45"){
@@ -211,7 +241,7 @@ class RootClass{
         $this->status_pwd=true;
         return false;
       }
-    }
+    }*/
   }
 }
 ?>
