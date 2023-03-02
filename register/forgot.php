@@ -12,15 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Forgot-User</title>
 	<style>
-		body{
-			width: 1200px;
-			margin: 0 auto;
-			font-family: Arial;
-		}
-		input{
-			padding: 7px 10px;
-			margin-bottom: 10px;
-		}
+		<?php include "../style.css" ?>
 	</style>
 </head>
 <body>

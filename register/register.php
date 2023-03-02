@@ -12,15 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User-Registration</title>
   <style>
-    body{
-      width: 1200px;
-      margin: 0 auto;
-      font-family: Arial;
-    }
-    input{
-      padding: 7px 10px;
-      margin-bottom: 15px;
-    }
+    <?php include "../style.css" ?>
   </style>
 
   <script src="../validity.js"></script>
@@ -46,24 +38,46 @@
     <dl>
       <dt><label for="name">Enter your name</label></dt>
       <dd>
-        <input type="text" name="name" id="name" required onblur="checkUname()">
+        <input type="text" name="name" id="name" required onblur="checkUname()" placeholder="Enter your name"
+        value="<?php if(isset($_SESSION['reg_name'])){echo $_SESSION['reg_name'];} ?>"
+        >
         <span id="invalid_name"></span>
+        <span>
+          <?php
+            if(isset($_SESSION['unique_status']) && $_SESSION['unique_status']){
+              echo "Please Enter Unique Name";
+            }
+          ?>
+        </span>
       </dd>
 
       <dt><label for="pwd">Enter your password</label></dt>
       <dd>
-        <input type="text" name="pwd" id="pwd" required>
+        <input type="text" name="pwd" id="pwd" required placeholder="Enter your password"
+        value="<?php if(isset($_SESSION['reg_pwd'])){echo $_SESSION['reg_pwd'];} ?>"
+        >
+        <span>
+          <?php
+            if(isset($_SESSION['unique_status']) && $_SESSION['unique_status']){
+              echo "Please Enter Unique Password";
+            }
+          ?>
+        </span>
       </dd>
 
       <dt><label for="mobile">Enter your mobile</label></dt>
       <dd>
-        <input type="text" name="mobile" id="mobile" required onblur="checkPhoneNo()">
+        <input type="text" name="mobile" id="mobile" required onblur="checkPhoneNo()" placeholder="Enter your mobile no"
+        value="<?php if(isset($_SESSION['reg_mobile'])){echo $_SESSION['reg_mobile'];} ?>"
+        >
         <span id="invalid_mobile"></span>
       </dd>
 
       <dt><label for="email">Enter your email</label></dt>
       <dd>
-        <input type="text" name="email" id="email" required onblur="checkEmailStatus()">
+        <input type="text" name="email" id="email" required onblur="checkEmailStatus()" placeholder="Enter your email"
+        value="<?php if(isset($_SESSION['reg_email'])){echo $_SESSION['reg_email'];} ?>"
+        >
         <span id="email_status"></span>
       </dd>
 

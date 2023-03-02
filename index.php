@@ -9,24 +9,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User-Login</title>
   <style>
-  body{
-  font-family: Arial;
-  margin: 0 auto;
-  width: 1200px;
-  }
-  .col-red{
-  color: red;
-  }
-  .col-green{
-  color: green;
-  }
-  li{
-  margin-bottom: 10px;
-  }
-  div a{
-  font-size: 18px;
-  text-decoration: none;
-  }
+    <?php include "style.css" ?>
   </style>
 </head>
 <body>
@@ -68,12 +51,24 @@ session_start();
   ?>
 
   <ul>
-  <li><a href="validForm/task1.php">Task1</a></li>
-  <li><a href="imageForm/task2.php">Task2</a></li>
-  <li><a href="subForm/task3.php">Task3</a></li>
-  <li><a href="phoneForm/task4.php">Task4</a></li>
-  <li><a href="emailForm/task5.php">Task5</a></li>
-  <li><a href="printForm/task6.php">Task6</a></li>
+    <li>
+      <a href="validForm/task1.php">Task1</a>
+    </li>
+    <li>
+      <a href="imageForm/task2.php">Task2</a>
+    </li>
+    <li>
+      <a href="subForm/task3.php">Task3</a>
+    </li>
+    <li>
+      <a href="phoneForm/task4.php">Task4</a>
+    </li>
+    <li>
+      <a href="emailForm/task5.php">Task5</a>
+    </li>
+    <li>
+      <a href="printForm/task6.php">Task6</a>
+    </li>
   </ul>
 </body>
 </html>

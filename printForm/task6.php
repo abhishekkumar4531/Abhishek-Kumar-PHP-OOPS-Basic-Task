@@ -4,24 +4,12 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Print-Form</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Print-Form</title>
   <style>
-  body{
-    margin: 100px auto;
-    font-family: Arial;
-    font-size: 18px;
-    width: 1200px;
-    }
-    input{
-    padding: 7px;
-    }
-    button{
-    padding: 7px 25px;
-    font-size: 17px;
-  }
+    <?php include "../style.css" ?>
   </style>
   <script src="../validity.js"></script>
   <script type="text/javascript">
@@ -53,21 +41,41 @@ session_start();
   ?>
   <form action="display.php" method="post" enctype="multipart/form-data">
     <h1>Student log-in page</h1>
+    <dl>
+      <dt>Enter your first-name</dt>
+      <dd>
+        <input type="text" name="fname" id="fname" onblur="checkFname()" required><span id="invalid_fname"></span>
+      </dd>
 
-    Enter your first-name : <input type="text" name="fname" id="fname" onblur="checkFname()" required><span id="invalid_fname"></span><br><br>
+      <dt>Enter your last-name</dt>
+      <dd>
+        <input type="text" name="lname" id="lname" onblur="checkLname()" required><span id="invalid_lname"></span>
+      </dd>
 
-    Enter your last-name : <input type="text" name="lname" id="lname" onblur="checkLname()" required><span id="invalid_lname"></span><br><br>
+      <dt>Enter your phone-number</dt>
+      <dd>
+        <input type="text" name="phone" id="phone" onblur="checkPhoneNo()" placeholder="Enter like : +919876543210" required><span id="invalid_phone"></span>
+      </dd>
 
-    Enter your phone-number : <input type="text" name="phone" id="phone" onblur="checkPhoneNo()" placeholder="Enter like : +919876543210" required><span id="invalid_phone"></span><br><br>
+      <dt>Enter your email-address</dt>
+      <dd>
+        <input type="text" name="user_email" id="user_email" onblur="checkEmailStatus()" placeholder="Enter a valid email" required><span id="email_status"></span>
+      </dd>
 
-    Enter your email-address : <input type="text" name="user_email" id="user_email" onblur="checkEmailStatus()" placeholder="Enter a valid email" required><span id="email_status"></span><br><br>
+      <dt>Upload your img</dt>
+      <dd>
+        <input type="file" name="user_img" id="user_img" required>
+      </dd>
 
-    Upload your img : <input type="file" name="user_img" id="user_img" required><br><br>
+      <dt>Enter your SUBJECT'S NAME|MARKS in text-area</dt>
+      <dd>
+        <textarea name="sub_details" id="sub_details" cols="30" rows="5" placeholder="Enter like Sub_Name|Sub_Marks.." required></textarea>
+      </dd>
 
-    Enter your subject-name and subject-marks in below text-area : <br>
-    <textarea name="sub_details" id="sub_details" cols="30" rows="5" placeholder="Enter like Sub_Name|Sub_Marks.." required></textarea><br><br>
-
-    <button id="submitBtn">Submit</button>
+      <dd>
+        <button id="submitBtn">Submit</button>
+      </dd>
+    </dl>
   </form>
 </body>
 </html>

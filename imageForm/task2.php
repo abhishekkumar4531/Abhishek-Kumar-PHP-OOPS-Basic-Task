@@ -9,19 +9,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Image-Form</title>
   <style>
-    body{
-      margin: 100px auto;
-      font-family: Arial;
-      font-size: 18px;
-      width: 1200px;
-    }
-    input{
-      padding: 7px;
-    }
-    button{
-      padding: 7px 25px;
-      font-size: 17px;
-    }
+    <?php include "../style.css" ?>
   </style>
   <script src="../validity.js"></script>
   <script type="text/javascript">
@@ -45,14 +33,26 @@ session_start();
   ?>
   <form action="image.php" method="post" enctype="multipart/form-data">
     <h1>User log-in page</h1>
+    <dl>
+      <dt>Enter your first-name</dt>
+      <dd>
+        <input type="text" name="fname" id="fname" onblur="checkFname()" required><span id="invalid_fname"></span>
+      </dd>
 
-    Enter your first-name : <input type="text" name="fname" id="fname" onblur="checkFname()" required><span id="invalid_fname"></span><br><br>
+      <dt>Enter your last-name</dt>
+      <dd>
+        <input type="text" name="lname" id="lname" onblur="checkLname()" required><span id="invalid_lname"></span>
+      </dd>
 
-    Enter your last-name : <input type="text" name="lname" id="lname" onblur="checkLname()" required><span id="invalid_lname"></span><br><br>
+      <dt>Upload your img</dt>
+      <dd>
+        <input type="file" name="user_img" id="user_img" required>
+      </dd>
 
-    Upload your img : <input type="file" name="user_img" id="user_img" required><br><br>
-
-    <button id="submitBtn">Submit</button>
+      <dd>
+        <button id="submitBtn">Submit</button>
+      </dd>
+    </dl>
   </form>
 </body>
 </html>
