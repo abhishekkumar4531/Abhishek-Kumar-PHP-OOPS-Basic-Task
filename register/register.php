@@ -24,11 +24,15 @@
     }
     function checkPhoneNo(){
       var user_mobile = document.getElementById('mobile').value;
-      reg_obj.checkPhone(user_phone, "invalid_mobile", "submitBtn", "red");
+      reg_obj.checkPhone(user_mobile, "invalid_mobile", "submitBtn", "red");
     }
     function checkEmailStatus(){
-      var user_email = document.getElementById('user_email').value;
+      var user_email = document.getElementById('email').value;
       reg_obj.checkEmail(user_email, "email_status", "submitBtn");
+    }
+    function checkPasswordStatus(){
+      var user_pwd = document.getElementById('pwd').value;
+      reg_obj.checkPasswords(user_pwd, "pwd_status", "submitBtn");
     }
   </script>
 </head>
@@ -53,9 +57,10 @@
 
       <dt><label for="pwd">Enter your password</label></dt>
       <dd>
-        <input type="text" name="pwd" id="pwd" required placeholder="Enter your password"
+        <input type="text" name="pwd" id="pwd" required onblur="checkPasswordStatus()" placeholder="Enter your password"
         value="<?php if(isset($_SESSION['reg_pwd'])){echo $_SESSION['reg_pwd'];} ?>"
         >
+        <span id="pwd_status"></span>
         <span>
           <?php
             if(isset($_SESSION['unique_status']) && $_SESSION['unique_status']){
@@ -81,7 +86,7 @@
         <span id="email_status"></span>
       </dd>
 
-      <dd><input type="submit" name="submitBtn"></dd>
+      <dd><input type="submit" name="submitBtn" id="submitBtn"></dd>
     </dl>
   </form>
 
