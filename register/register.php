@@ -15,7 +15,7 @@
     <?php include "../style.css" ?>
   </style>
 
-  <script src="../validity.js"></script>
+  <script src="../validity.js?newversion"></script>
   <script type="text/javascript">
     reg_obj = new Validity();
     function checkUname(){
@@ -46,6 +46,8 @@
         value="<?php if(isset($_SESSION['reg_name'])){echo $_SESSION['reg_name'];} ?>"
         >
         <span id="invalid_name"></span>
+      </dd>
+      <dd>
         <span>
           <?php
             if(isset($_SESSION['unique_status']) && $_SESSION['unique_status']){
@@ -61,10 +63,12 @@
         value="<?php if(isset($_SESSION['reg_pwd'])){echo $_SESSION['reg_pwd'];} ?>"
         >
         <span id="pwd_status"></span>
+      </dd>
+      <dd>
         <span>
           <?php
             if(isset($_SESSION['unique_status']) && $_SESSION['unique_status']){
-              echo "Please Enter Unique Password";
+              echo " Please Enter Unique Password";
             }
           ?>
         </span>

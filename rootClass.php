@@ -188,7 +188,7 @@ class RootClass{
   *
   * @param [string] $username : This contains the user-name.
   * @param [string] $userpwd : It contains user-password.
-  * This function first check user-name and password is valid or not, if valid then return true otherwise return false.
+  * This function first check user-name and password from database and then, if data are valid then return true otherwise return false.
   *
   * @return boolean
   */
@@ -234,6 +234,18 @@ class RootClass{
       }
     }*/
   }
+
+  /**
+   * function getRegister($username, $userpwd, $usermobile, $useremail)
+   * @param [string] $username : It contains user-name
+   * @param [string] $userpwd : It contains user-password
+   * @param [string] $usermobile : It contains user-mobile number
+   * @param [string] $useremail : It contains user-email
+   * This function first get the data from 'FORM' and then check the username and user-password already exist or not,
+   * if exist then it will not store the data into database or if username or user-password does't exist then this
+   * function will store the data into database.
+   * @var boolean
+   */
   public $unique_status = false;
   function getRegister($username, $userpwd, $usermobile, $useremail){
     $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'User_DB');
@@ -279,6 +291,17 @@ class RootClass{
     $conn->close();
   }
 
+  /**
+   * function forgotPwd($name, $cpwd, $newpwd)
+   *
+   * @param [string] $name : It contains user-name
+   * @param [string] $cpwd : It contains user current-password
+   * @param [string] $newpwd : It contains user new-password
+   * This function first check the user-name and current password is aviallable or not,
+   * if not available the it return false, if available then it updated the user new-password.
+   * @return boolean
+   */
+  public $valid_user = false;
   function forgotPwd($name, $cpwd, $newpwd){
     $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'User_DB');
     if ($conn->connect_error) {
@@ -298,14 +321,17 @@ class RootClass{
       $post = "UPDATE User SET userPwd = '$newpwd' WHERE userName = '$name' AND userPwd = '$cpwd'";
       if ($conn->query($post) === TRUE) {
         //echo "Record updated successfully";
+        $this->valid_user = false;
         return true;
       }
       else {
         //echo "Error updating record: " . $conn->error;
+        $this->valid_user = true;
         return false;
       }
     }
     else {
+      $this->valid_user = true;
       return false;
     }
     $conn->close();

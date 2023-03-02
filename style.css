@@ -1,6 +1,6 @@
 body{
-  width: 1200px;
-  margin: 0 auto;
+  width: 450px;
+  margin: 100px auto;
   font-family: Arial;
 }
 a{
@@ -36,8 +36,16 @@ span, a{
   color: red;
 }
 dd{
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 dt{
-  margin: 5px 0px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+li a{
+  color: black;
+  font-size: 18px;
+}
+li a:hover{
+  color: red;
 }

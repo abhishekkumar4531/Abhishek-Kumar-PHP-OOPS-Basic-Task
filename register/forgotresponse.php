@@ -3,12 +3,22 @@
 
   require("../rootClass.php");
 
-  $foObj = new RootClass();
+  if(isset($_POST['submitBtn'])){
+    $foObj = new RootClass();
 
-  $forgotSatus = $foObj->forgotPwd($_POST['name'], $_POST['cpassword'], $_POST['npassword']);
+    $forgotSatus = $foObj->forgotPwd($_POST['name'], $_POST['cpassword'], $_POST['npassword']);
 
-  if($forgotSatus){
-    header("location: ../login/login.php");
+    $_SESSION['valid_user'] = $foObj->valid_user;
+    $_SESSION['for_username'] = $_POST['name'];
+    $_SESSION['for_cpassword'] = $_POST['cpassword'];
+    $_SESSION['for_npassword'] = $_POST['npassword'];
+
+    if($forgotSatus){
+      header("location: ../login/login.php");
+    }
+    else{
+      header("location: forgot.php");
+    }
   }
   else{
     header("location: forgot.php");

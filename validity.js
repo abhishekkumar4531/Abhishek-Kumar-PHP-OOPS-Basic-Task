@@ -10,8 +10,8 @@ class Validity{
   check_pwd = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
   /**
-   * 'checkName/Phone/Email' is parametrised method;
-   * 'invalidName/Phone/Email' is a variable which hold 'id' of a html tag where error msg should show;
+   * 'checkName/Phone/Email/Passwords' is parametrised method;
+   * 'invalidName/Phone/Email/Passwords' is a variable which hold 'id' of a html tag where error msg should show;
    * 'submitBtn' is a variable which hold 'id' of submit button;
    * 'type' is a vraible which hold color;
 
@@ -24,7 +24,7 @@ class Validity{
       And enable the submit button.
    * }
 
-   * checkEmail's working process is same only change in message display like :
+   * checkEmail/Passwords's working process is same only change in message display like :
       if condition is true then display success message and if false then display error message.
   */
 
@@ -64,14 +64,43 @@ class Validity{
     }
   }
 
+  //checkPasswords is a parametrised method which is responsible for the validation of user passwords.
   checkPasswords(userPwd, pwdStatus, submitBtn){
-    if(!(userPwd.match(this.check_email))){
-      document.getElementById(pwdStatus).innerHTML = `<span style="color:red;">Enter a valid-email syntax<span>`;
+    if(!(userPwd.match(this.check_pwd))){
+      document.getElementById(pwdStatus).innerHTML = `<span style="color:red;">Enter a valid-password:Xyz@1<span>`;
       document.getElementById(submitBtn).disabled = true;
     }
     else{
-      document.getElementById(pwdStatus).innerHTML = `<span style="color:green;">This is valid-email syntax<span>`;
+      document.getElementById(pwdStatus).innerHTML = `<span style="color:green;">This is valid-password<span>`;
       document.getElementById(submitBtn).disabled = false;
+    }
+  }
+
+  //comparePasswords is a parametrised method which is comparing user entered passwords.
+  comparePasswords(newPassword, rePassword, passStatus, type){
+    var status = false;
+    if(newPassword === rePassword){
+      status = true;
+    }
+    else{
+      status = false;
+    }
+
+    if(type){
+      if(status){
+        document.getElementById(passStatus).innerHTML = `<span>New password should't same</span>`;
+      }
+      else{
+        document.getElementById(passStatus).innerHTML = ``;
+      }
+    }
+    else{
+      if(status){
+        document.getElementById(passStatus).innerHTML = ``;
+      }
+      else{
+        document.getElementById(passStatus).innerHTML = `<span>Set password should same</span>`;
+      }
     }
   }
 }
