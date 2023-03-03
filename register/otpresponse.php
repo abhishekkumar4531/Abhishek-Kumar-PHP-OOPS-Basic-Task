@@ -80,5 +80,7 @@
 </body>
 </html>
 <?php
-  session_unset();
+  if(!isset($_SESSION['login_user'])){
+    session_unset();
+  }
 ?>

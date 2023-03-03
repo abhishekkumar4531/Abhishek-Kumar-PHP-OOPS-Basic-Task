@@ -3,9 +3,6 @@
   if(isset($_SESSION['login_user'])){
 	header("location: ../index.php");
   }
-  else{
-    session_unset();
-  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,3 +105,8 @@
 	</form>
 </body>
 </html>
+<?php
+  if(!isset($_SESSION['login_user'])){
+    session_unset();
+  }
+?>
