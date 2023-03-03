@@ -1,6 +1,8 @@
 <?php
 //vendor is folder realted to composer and here used for 'Guzzle'
 require("vendor/autoload.php");
+use PHPMailer\PHPMailer\PHPMailer;
+
 //Client is a class which coming from GuzzleHttp and Guzzle used it for email validation.
 use GuzzleHttp\Client;
 
@@ -253,7 +255,7 @@ class RootClass{
       die("Connection failed: " . $conn->connect_error);
     }
 
-    $check_sql = "SELECT userName, userPwd FROM User WHERE userName = '$username' AND userPwd = '$userpwd'";
+    $check_sql = "SELECT userName FROM User WHERE userName = '$username'";
 
     $result = $conn->query($check_sql);
 
@@ -319,6 +321,95 @@ class RootClass{
         }
       }*/
       $post = "UPDATE User SET userPwd = '$newpwd' WHERE userName = '$name' AND userPwd = '$cpwd'";
+      if ($conn->query($post) === TRUE) {
+        //echo "Record updated successfully";
+        $this->valid_user = false;
+        return true;
+      }
+      else {
+        //echo "Error updating record: " . $conn->error;
+        $this->valid_user = true;
+        return false;
+      }
+    }
+    else {
+      $this->valid_user = true;
+      return false;
+    }
+    $conn->close();
+  }
+
+  public $otpStatus;
+  function otpSend($name){
+    $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'User_DB');
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+
+    $get = "SELECT userName, userEmail FROM User WHERE UserName = '$name'";
+    $result = $conn->query($get);
+    if ($result->num_rows > 0) {
+      $row = $result->fetch_assoc();
+      if($name === $row["userName"]){
+        $email = $row["userEmail"];
+        $otp = rand(100000, 999999);
+        $this->otpStatus = $otp;
+
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        //$mail->SMTPDebug=2;
+
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = "abhi31kr45@gmail.com";
+        $mail->Password = "ylagckqsadjtgigz";
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        $mail->setFrom("abhi31kr45@gmail.com");
+        $mail->addAddress($email);
+        $mail->Subject = "Form submission!!!";
+        $mail->isHTML(TRUE);
+        $mail->Body = "<b>Mail content:</b> Your OTP => $otp";
+        $mail->send();
+        if($mail->send()){
+          //echo "<h3>MESSAGE SENT!!!</h3>";
+        }
+        else{
+          //echo "Error!!!";
+        }
+
+
+
+        $this->valid_user = false;
+        return true;
+      }
+    }
+    else {
+      $this->valid_user = true;
+      return false;
+    }
+    $conn->close();
+  }
+
+  public $otpVerify = false;
+  function confirmPwd($name, $newpwd){
+    $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'User_DB');
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+
+    $get = "SELECT userName FROM User WHERE UserName = '$name'";
+    $result = $conn->query($get);
+
+    if ($result->num_rows > 0) {
+      /*while($row = $result->fetch_assoc()) {
+        if($name === $row["userName"] && $cpwd === $row["userPwd"]){
+          $status = true;
+          break;
+        }
+      }*/
+      $post = "UPDATE User SET userPwd = '$newpwd' WHERE userName = '$name'";
       if ($conn->query($post) === TRUE) {
         //echo "Record updated successfully";
         $this->valid_user = false;
