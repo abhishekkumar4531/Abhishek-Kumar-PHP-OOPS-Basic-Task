@@ -100,7 +100,7 @@
 </body>
 </html>
 <?php
-  if(!isset($_SESSION['login_user'])){
-    session_unset();
-  }
+  // if(!isset($_SESSION['login_user'])){
+  //   session_unset();
+  // }
 ?>
