@@ -1,7 +1,7 @@
 <?php
 	session_start();
   if(isset($_SESSION['login_user'])){
-	  header("location: ../index.php");
+	  header("location: ../../index.php");
   }
   if(!isset($_SESSION['cotp_username'])){
     header("location: forgot.php");
@@ -15,7 +15,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Forgot-User</title>
 	<style>
-		<?php include "../style.css" ?>
+		<?php include "../../style.css" ?>
 	</style>
 
   <script src="../validity.js?newversion"></script>

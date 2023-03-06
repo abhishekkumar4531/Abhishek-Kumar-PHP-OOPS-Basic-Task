@@ -15,7 +15,7 @@
     require("taskClass.php");
     $user_profile = $_SESSION['login_user'];
     if(!$user_profile){
-      header("location: ../login/login.php");
+      header("location: ../basicMysql/login/login.php");
     }
 
     $obj = new FORMS();

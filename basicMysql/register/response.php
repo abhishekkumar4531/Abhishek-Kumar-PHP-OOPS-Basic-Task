@@ -1,9 +1,9 @@
 <?php
   session_start();
-  require("../rootClass.php");
+  require("../mysqlClass.php");
 
   if(isset($_POST['submitBtn'])){
-    $regObj = new RootClass();
+    $regObj = new MysqlMethods();
 
     $regStatus = $regObj->getRegister($_POST['name'], $_POST['pwd'], $_POST['mobile'], $_POST['email']);
 

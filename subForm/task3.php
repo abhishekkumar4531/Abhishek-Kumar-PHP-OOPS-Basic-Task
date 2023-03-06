@@ -28,7 +28,7 @@ session_start();
   <?php
   $user_profile = $_SESSION['login_user'];
   if($user_profile==false){
-    header("location: ../login/login.php");
+    header("location: ../basicMysql/login/login.php");
   }
   ?>
   <form action="subject.php" method="post" enctype="multipart/form-data">

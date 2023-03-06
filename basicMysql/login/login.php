@@ -9,13 +9,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User-Login</title>
   <style>
-    <?php include "../style.css" ?>
+    <?php include "../../style.css" ?>
   </style>
 </head>
 <body>
   <?php
     if(isset($_SESSION['login_user'])){
-      header("location: ../index.php");
+      header("location: ../../index.php");
     }
 
     //require("rootClass.php");
@@ -49,10 +49,10 @@
         </span>
         <ol>
           <li>
-            <a href="/register/change.php">Change password!</a>
+            <a href="/basicMysql/register/change.php">Change password!</a>
           </li>
           <li>
-            <a href="/register/forgot.php">Forgot password!</a>
+            <a href="/basicMysql/register/forgot.php">Forgot password!</a>
           </li>
         </ol>
       </dd>
@@ -63,7 +63,7 @@
     </dl>
   </form>
   <div>
-      <a href="/register/register.php">New user?</a>
+      <a href="/basicMysql/register/register.php">New user?</a>
   </div>
 </body>
 </html>

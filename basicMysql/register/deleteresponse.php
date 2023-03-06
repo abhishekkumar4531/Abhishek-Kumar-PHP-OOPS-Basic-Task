@@ -1,10 +1,10 @@
 <?php
   session_start();
-  require("../rootClass.php");
+  require("../mysqlClass.php");
 
   if(isset($_POST['sendOtp'])){
     echo "Step-1<br>";
-    $delObj = new RootClass();
+    $delObj = new MysqlMethods();
 
     $_SESSION['del_name'] = $_POST['username'];
     $_SESSION['del_pwd'] = $_POST['userpwd'];
@@ -32,7 +32,7 @@
     }
   }
   else if(isset($_POST['delete'])){
-    $cnfUser = new RootClass();
+    $cnfUser = new MysqlMethods();
 
     if(number_format($_SESSION['get_otp']) == number_format($_POST['otp'])){
       if(isset($_SESSION['del_name']) && isset($_SESSION['del_pwd'])){

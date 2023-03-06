@@ -12,10 +12,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User-Delete</title>
   <style>
-    <?php include "../style.css" ?>
+    <?php include "../../style.css" ?>
   </style>
 
-  <script src="../validity.js?newversion"></script>
+  <script src="../../validity.js?newversion"></script>
   <script type="text/javascript">
     reg_obj = new Validity();
     function checkUname(){
@@ -73,7 +73,7 @@
   </form>
 
   <div>
-    <a href="/login/login.php">Go back</a>
+    <a href="/basicMysql/login/login.php">Go back</a>
   </div>
 </body>
 </html>

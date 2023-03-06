@@ -1,10 +1,10 @@
 <?php
   session_start();
 
-  require("../rootClass.php");
+  require("../mysqlClass.php");
 
   if(isset($_POST['submitBtn'])){
-    $foObj = new RootClass();
+    $foObj = new MysqlMethods();
 
     $_SESSION['cotp_npassword'] = $_POST['npassword'];
     if(isset($_SESSION['cotp_username'])){
@@ -34,7 +34,7 @@
     }
   }
   else if(isset($_POST['otpSubmit'])){
-    $otpObj = new RootClass();
+    $otpObj = new MysqlMethods();
 
     $forgotSatus = $otpObj->otpSend($_POST['name']);
     $getOtp = $otpObj->otpStatus;

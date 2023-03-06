@@ -1,10 +1,10 @@
 <?php
   session_start();
 
-  require("../rootClass.php");
+  require("../mysqlClass.php");
 
   if(isset($_POST['submitBtn'])){
-    $foObj = new RootClass();
+    $foObj = new MysqlMethods();
 
     $forgotSatus = $foObj->forgotPwd($_POST['name'], $_POST['cpassword'], $_POST['npassword']);
 

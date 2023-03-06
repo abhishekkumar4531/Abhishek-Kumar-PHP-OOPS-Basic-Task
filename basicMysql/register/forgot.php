@@ -1,7 +1,7 @@
 <?php
 	session_start();
   if(isset($_SESSION['login_user'])){
-	header("location: ../index.php");
+	header("location: ../../index.php");
   }
   else{
     session_unset();
@@ -15,10 +15,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Forgot-User</title>
 	<style>
-		<?php include "../style.css" ?>
+		<?php include "../../style.css" ?>
 	</style>
 
-  <script src="../validity.js?newversion"></script>
+  <script src="../../validity.js?newversion"></script>
   <script type="text/javascript">
     reg_obj = new Validity();
     function checkUname(){

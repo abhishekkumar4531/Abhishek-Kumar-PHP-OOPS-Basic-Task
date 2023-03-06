@@ -1,7 +1,7 @@
 <?php
 	session_start();
   if(isset($_SESSION['login_user'])){
-	header("location: ../index.php");
+	header("location: ../../index.php");
   }
 ?>
 <!DOCTYPE html>
@@ -12,10 +12,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Forgot-User</title>
 	<style>
-		<?php include "../style.css" ?>
+		<?php include "../../style.css" ?>
 	</style>
 
-  <script src="../validity.js?newversion"></script>
+  <script src="../../validity.js?newversion"></script>
   <script type="text/javascript">
     reg_obj = new Validity();
     function checkUname(){
@@ -35,13 +35,11 @@
       reg_obj.checkPasswords(re_pwd, "invalid_repassword", "submitBtn");
     }
     function comparePassword(){
-      alert("---Not same---")
       var current_pass = document.getElementById('cpassword').value;
       var new_pass = document.getElementById('npassword').value;
       reg_obj.diffPasswords(current_pass, new_pass, 'new_status', 'submitBtn');
     }
     function confirmPassword(){
-      alert("---should be same---");
       var new_pass = document.getElementById('npassword').value;
       var re_pass = document.getElementById('rpassword').value;
       reg_obj.samePasswords(new_pass, re_pass, 're_status', 'submitBtn');

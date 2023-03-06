@@ -42,12 +42,12 @@
   <?php
   if($status){
     echo "<p class='col-green'>". $_SESSION['login_user'] ." thanks for visiting..</p>";
-    echo "<a href='/login/logout.php'>Click here for logout</a>";
-    echo "<br><a href='/register/delete.php'>Delete your account</a>";
+    echo "<a href='/basicMysql/login/logout.php'>Click here for logout</a>";
+    echo "<br><a href='/basicMysql/register/delete.php'>Delete your account</a>";
   }
   else{
     echo "<p class='col-red'>*you have to log-in before visiting on tasks</p>";
-    echo "<a href='/login/login.php'>Click here for login</a>";
+    echo "<a href='/basicMysql/login/login.php'>Click here for login</a>";
   }
   ?>
 
