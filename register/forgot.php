@@ -23,7 +23,7 @@
     reg_obj = new Validity();
     function checkUname(){
       var user_name = document.getElementById('name').value;
-      reg_obj.checkName(user_name, "invalid_name", "submitBtn", "red");
+      reg_obj.checkName(user_name, "invalid_name", "otpSubmit", "red");
     }
   </script>
 </head>
@@ -47,7 +47,7 @@
           ?>
         </span>
       </dd>
-    	<dd><input type="submit" name="otpSubmit"></dd>
+    	<dd><input type="submit" name="otpSubmit" id="otpSubmit"></dd>
 		</dl>
 	</form>
 </body>

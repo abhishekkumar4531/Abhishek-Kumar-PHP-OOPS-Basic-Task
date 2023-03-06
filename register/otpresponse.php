@@ -32,7 +32,7 @@
     function confirmPassword(){
       var new_pass = document.getElementById('npassword').value;
       var re_pass = document.getElementById('rpassword').value;
-      var status = reg_obj.comparePasswords(new_pass, re_pass, 're_status', false);
+      var status = reg_obj.samePasswords(new_pass, re_pass, 're_status', 'submitBtn');
     }
   </script>
 </head>
@@ -68,13 +68,13 @@
 
 			<dt><label for="rpassword">Confirm new pwd</label></dt>
 			<dd>
-        <input type="text" name="rpassword" id="rpassword" required onblur="rePassword()" onkeyup="confirmPassword()" placeholder="Confirm password"
+        <input type="text" name="rpassword" id="rpassword" required onblur="rePassword();confirmPassword();" placeholder="Confirm password"
         value="<?php if(isset($_SESSION['cotp_npassword'])){echo $_SESSION['cotp_npassword'];} ?>"
         >
         <span id="re_status"></span>
       </dd>
 
-			<dd><input type="submit" name="submitBtn"></dd>
+			<dd><input type="submit" name="submitBtn" id="submitBtn"></dd>
 		</dl>
 	</form>
 </body>

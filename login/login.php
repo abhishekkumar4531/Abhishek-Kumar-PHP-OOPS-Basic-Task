@@ -17,9 +17,6 @@
     if(isset($_SESSION['login_user'])){
       header("location: ../index.php");
     }
-    else{
-      session_unset();
-    }
 
     //require("rootClass.php");
     //$loginObj = new RootClass();
@@ -50,7 +47,14 @@
             }
           ?>
         </span>
-        <div><a href="/register/forgot.php">Forgot password!</a></div>
+        <ol>
+          <li>
+            <a href="/register/change.php">Change password!</a>
+          </li>
+          <li>
+            <a href="/register/forgot.php">Forgot password!</a>
+          </li>
+        </ol>
       </dd>
 
       <dd>

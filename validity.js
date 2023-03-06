@@ -77,30 +77,25 @@ class Validity{
   }
 
   //comparePasswords is a parametrised method which is comparing user entered passwords.
-  comparePasswords(newPassword, rePassword, passStatus, type){
-    var status = false;
+  diffPasswords(newPassword, rePassword, passStatus, submitBtn){
     if(newPassword === rePassword){
-      status = true;
+      document.getElementById(passStatus).innerHTML = `<span>New password should't same</span>`;
+      document.getElementById(submitBtn).disabled = true;
     }
     else{
-      status = false;
+      document.getElementById(passStatus).innerHTML = ``;
+      document.getElementById(submitBtn).disabled = false;
     }
+  }
 
-    if(type){
-      if(status){
-        document.getElementById(passStatus).innerHTML = `<span>New password should't same</span>`;
-      }
-      else{
-        document.getElementById(passStatus).innerHTML = ``;
-      }
+  samePasswords(newPassword, rePassword, passStatus, submitBtn){
+    if(newPassword === rePassword){
+      document.getElementById(passStatus).innerHTML = ``;
+      document.getElementById(submitBtn).disabled = false;
     }
     else{
-      if(status){
-        document.getElementById(passStatus).innerHTML = ``;
-      }
-      else{
-        document.getElementById(passStatus).innerHTML = `<span>Set password should same</span>`;
-      }
+      document.getElementById(passStatus).innerHTML = `<span>Set password should be same</span>`;
+      document.getElementById(submitBtn).disabled = true;
     }
   }
 }

@@ -16,6 +16,7 @@
 
         if($forgotSatus){
           //echo "Chnaged";
+          session_unset();
           header("location: ../login/login.php");
         }
         else{

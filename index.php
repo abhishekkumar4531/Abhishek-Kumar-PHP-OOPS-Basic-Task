@@ -43,6 +43,7 @@
   if($status){
     echo "<p class='col-green'>". $_SESSION['login_user'] ." thanks for visiting..</p>";
     echo "<a href='/login/logout.php'>Click here for logout</a>";
+    echo "<br><a href='/register/delete.php'>Delete your account</a>";
   }
   else{
     echo "<p class='col-red'>*you have to log-in before visiting on tasks</p>";

@@ -427,5 +427,23 @@ class RootClass{
     }
     $conn->close();
   }
+
+  function deleteUser($name, $pwd){
+    $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'User_DB');
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+
+    $delete = "DELETE FROM User WHERE userName = '$name' AND userPwd = '$pwd'";
+
+    if ($conn->query($delete) === TRUE) {
+      //echo "Record deleted successfully";
+      return true;
+    } else {
+      //echo "Error deleting record: " . $conn->error;
+      return false;
+    }
+    $conn->close();
+  }
 }
 ?>

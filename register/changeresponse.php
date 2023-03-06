@@ -14,6 +14,7 @@
     $_SESSION['for_npassword'] = $_POST['npassword'];
 
     if($forgotSatus){
+      session_unset();
       header("location: ../login/login.php");
     }
     else{

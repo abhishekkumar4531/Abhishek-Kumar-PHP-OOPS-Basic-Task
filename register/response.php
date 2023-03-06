@@ -14,6 +14,7 @@
     $_SESSION['reg_email'] = $_POST['email'];
 
     if($regStatus){
+      session_unset();
       header("location: ../login/login.php");
     }
     else{
