@@ -4,17 +4,17 @@
   require("../mysqlClass.php");
 
   if(isset($_POST['submitBtn'])){
-    $foObj = new MysqlMethods();
+    $forgot_obj = new MysqlMethods();
 
     $_SESSION['cotp_npassword'] = $_POST['npassword'];
     if(isset($_SESSION['cotp_username'])){
       if(number_format($_SESSION['get_otp']) == number_format($_POST['otp'])){
         $_SESSION['otp_status'] = false;
 
-        $forgotSatus = $foObj->confirmPwd($_SESSION['cotp_username'], $_POST['npassword']);
-        $_SESSION['valid_user'] = $foObj->valid_user;
+        $forgot_status = $forgot_obj->confirmPwd($_SESSION['cotp_username'], $_POST['npassword']);
+        $_SESSION['valid_user'] = $forgot_obj->validUser;
 
-        if($forgotSatus){
+        if($forgot_status){
           //echo "Chnaged";
           session_unset();
           header("location: ../login/login.php");
@@ -34,16 +34,16 @@
     }
   }
   else if(isset($_POST['otpSubmit'])){
-    $otpObj = new MysqlMethods();
+    $otp_obj = new MysqlMethods();
 
-    $forgotSatus = $otpObj->otpSend($_POST['name']);
-    $getOtp = $otpObj->otpStatus;
+    $forgot_status = $otp_obj->otpSend($_POST['name']);
+    $getOtp = $otp_obj->otpValue;
 
-    $_SESSION['valid_user'] = $otpObj->valid_user;
+    $_SESSION['valid_user'] = $otp_obj->validUser;
     $_SESSION['cotp_username'] = $_POST['name'];
     $_SESSION['get_otp'] = $getOtp;
 
-    if($forgotSatus){
+    if($forgot_status){
       header("location: otpresponse.php");
     }
     else{

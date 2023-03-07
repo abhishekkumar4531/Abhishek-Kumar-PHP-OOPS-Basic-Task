@@ -49,11 +49,7 @@
       </dd>
       <dd>
         <span>
-          <?php
-            if(isset($_SESSION['unique_status']) && $_SESSION['unique_status']){
-              echo "Please Enter Unique Name";
-            }
-          ?>
+          <?php if(isset($_SESSION['unique_status']) && $_SESSION['unique_status']){ echo "Please Enter Unique Name"; } ?>
         </span>
       </dd>
 
@@ -66,11 +62,7 @@
       </dd>
       <dd>
         <span>
-          <?php
-            if(isset($_SESSION['unique_status']) && $_SESSION['unique_status']){
-              echo " Please Enter Unique Password";
-            }
-          ?>
+          <?php if(isset($_SESSION['unique_status']) && $_SESSION['unique_status']){ echo " Please Enter Unique Password"; } ?>
         </span>
       </dd>
 
@@ -99,8 +91,3 @@
   </div>
 </body>
 </html>
-<?php
-  // if(!isset($_SESSION['login_user'])){
-  //   session_unset();
-  // }
-?>

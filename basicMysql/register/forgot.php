@@ -1,7 +1,7 @@
 <?php
-	session_start();
+  session_start();
   if(isset($_SESSION['login_user'])){
-	header("location: ../../index.php");
+  header("location: ../../index.php");
   }
   else{
     session_unset();
@@ -40,11 +40,7 @@
       </dd>
       <dd>
         <span>
-          <?php
-            if(isset($_SESSION['valid_user']) && $_SESSION['valid_user']){
-              echo " Please Enter Valid User-Name";
-            }
-          ?>
+          <?php if(isset($_SESSION['valid_user']) && $_SESSION['valid_user']){ echo " Please Enter Valid User-Name"; } ?>
         </span>
       </dd>
     	<dd><input type="submit" name="otpSubmit" id="otpSubmit"></dd>

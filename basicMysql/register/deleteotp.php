@@ -23,11 +23,7 @@
 			<dd>
         <input type="text" name="otp" id="otp" required placeholder="Enter OTP">
         <span>
-          <?php
-            if(isset($_SESSION['otp_status']) && $_SESSION['otp_status']){
-              echo "Invalid OTP!!!";
-            }
-          ?>
+          <?php if(isset($_SESSION['otp_status']) && $_SESSION['otp_status']){ echo "Invalid OTP!!!"; } ?>
         </span>
       </dd>
 
@@ -38,8 +34,3 @@
 	</form>
 </body>
 </html>
-<?php
-  // if(!isset($_SESSION['login_user'])){
-  //   session_unset();
-  // }
-?>

@@ -41,11 +41,7 @@
       </dd>
       <dd>
         <span>
-          <?php
-            if(isset($_SESSION['del_status']) && $_SESSION['del_status']){
-              echo "Please Enter Valid Name";
-            }
-          ?>
+          <?php if(isset($_SESSION['del_status']) && $_SESSION['del_status']){ echo "Please Enter Valid Name"; } ?>
         </span>
       </dd>
 
@@ -58,11 +54,7 @@
       </dd>
       <dd>
         <span>
-          <?php
-            if(isset($_SESSION['del_status']) && $_SESSION['del_status']){
-              echo " Please Enter Valid Password";
-            }
-          ?>
+          <?php if(isset($_SESSION['del_status']) && $_SESSION['del_status']){ echo " Please Enter Valid Password"; } ?>
         </span>
       </dd>
 

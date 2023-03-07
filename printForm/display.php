@@ -9,38 +9,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Download-Here</title>
   <style>
-    body{
-      font-family: Arial;
-      text-align: center;
-    }
-    h3{
-      font-size: 21px;
-      color: green;
-    }
-    table{
-      margin: 0 auto;
-      width: 350px;
-    }
-    table th,td{
-      padding: 7px;
-    }
-    img{
-      width: 150px;
-      height: 150px;
-    }
-    h6{
-      color: pink;
-    }
-    h5{
-      color: red;
-    }
-    div{
-      margin-top: 100px;
-    }
-    div button{
-      padding: 10px 12px;
-      font-size: 17px;
-    }
+    <?php include '../style.css' ?>
   </style>
 </head>
 <body>

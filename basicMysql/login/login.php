@@ -29,11 +29,7 @@
       <dd>
         <input type="text" name="username" placeholder="Enter user-name" value="<?php if(isset($_SESSION['logged_user'])){echo $_SESSION['logged_user'];} ?>" required>
         <span>
-          <?php
-            if(isset($_SESSION['logged_nstatus']) && $_SESSION['logged_nstatus']){
-              echo "Enter valid user-name!!!";
-            }
-          ?>
+          <?php if(isset($_SESSION['logged_nstatus']) && $_SESSION['logged_nstatus']){ echo "Enter valid user-name!!!"; } ?>
         </span>
       </dd>
 
@@ -41,11 +37,7 @@
       <dd>
         <input type="text" name="userpwd" placeholder="Enter user-password" value="<?php if(isset($_SESSION['logged_pwd'])){echo $_SESSION['logged_pwd'];} ?>" required>
         <span>
-          <?php
-            if(isset($_SESSION['logged_pstatus']) && $_SESSION['logged_pstatus']){
-              echo "Enter valid user-password!!!";
-            }
-          ?>
+          <?php if(isset($_SESSION['logged_pstatus']) && $_SESSION['logged_pstatus']){ echo "Enter valid user-password!!!"; } ?>
         </span>
         <ol>
           <li>

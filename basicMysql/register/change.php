@@ -30,7 +30,7 @@
       var new_pwd = document.getElementById('npassword').value;
       reg_obj.checkPasswords(new_pwd, "invalid_newpassword", "submitBtn");
     }
-    function rePassword(){
+    function reenterPassword(){
       var re_pwd = document.getElementById('rpassword').value;
       reg_obj.checkPasswords(re_pwd, "invalid_repassword", "submitBtn");
     }
@@ -59,15 +59,11 @@
       </dd>
       <dd>
         <span>
-          <?php
-            if(isset($_SESSION['valid_user']) && $_SESSION['valid_user']){
-              echo " Please Enter Valid User-Name";
-            }
-          ?>
+          <?php if(isset($_SESSION['valid_user']) && $_SESSION['valid_user']){ echo " Please Enter Valid User-Name"; } ?>
         </span>
       </dd>
 
-			<dt><label for="cpassword">Enter current pwd</label></dt>
+			<dt><label for="cpassword">Enter current password</label></dt>
 			<dd>
         <input type="text" name="cpassword" id="cpassword" required onblur="currentPassword()" placeholder="Enter current password"
         value="<?php if(isset($_SESSION['for_cpassword'])){echo $_SESSION['for_cpassword'];} ?>"
@@ -79,15 +75,11 @@
       </dd>
       <dd>
         <span>
-          <?php
-            if(isset($_SESSION['valid_user']) && $_SESSION['valid_user']){
-              echo " Please Enter Valid User-Current-Password";
-            }
-          ?>
+          <?php if(isset($_SESSION['valid_user']) && $_SESSION['valid_user']){ echo " Please Enter Valid User-Current-Password"; } ?>
         </span>
       </dd>
 
-			<dt><label for="npassword">Enter new pwd</label></dt>
+			<dt><label for="npassword">Enter new password</label></dt>
 			<dd>
         <input type="text" name="npassword" id="npassword" required onblur="newPassword();comparePassword();" placeholder="Enter new password"
         value="<?php if(isset($_SESSION['for_npassword'])){echo $_SESSION['for_npassword'];} ?>"
@@ -98,9 +90,9 @@
         <span id="new_status"></span>
       </dd>
 
-			<dt><label for="rpassword">Confirm new pwd</label></dt>
+			<dt><label for="rpassword">Confirm new password</label></dt>
 			<dd>
-        <input type="text" name="rpassword" id="rpassword" required onblur="rePassword();confirmPassword();" placeholder="Confirm password"
+        <input type="text" name="rpassword" id="rpassword" required onblur="reenterPassword();confirmPassword();" placeholder="Confirm password"
         value="<?php if(isset($_SESSION['for_npassword'])){echo $_SESSION['for_npassword'];} ?>"
         >
         <span id="invalid_repassword"></span>
@@ -114,8 +106,3 @@
 	</form>
 </body>
 </html>
-<?php
-  if(!isset($_SESSION['login_user'])){
-    session_unset();
-  }
-?>

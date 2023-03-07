@@ -1,6 +1,6 @@
 <?php
   //vendor is folder realted to composer and here used for 'Guzzle'
-  //require("../vendor/autoload.php");
+  require '../../vendor/autoload.php';
   use PHPMailer\PHPMailer\PHPMailer;
 
   //Client is a class which coming from GuzzleHttp and Guzzle used it for email validation.
@@ -8,14 +8,21 @@
   class MysqlMethods
   {
     //Login user-name
-    public $getname;
+    public $getName;
     //Login user-password
-    public $getpwd;
-    //Login user-name error message
-    public $status_name = false;
-    //Login user-password error message
-    public $status_pwd = false;
-
+    public $getPwd;
+    //It is checking the user-name is valid or not, if valid then false otherwise true
+    public $statusName = false;
+    //It is checking the user-password is valid or not, if valid then false otherwise true
+    public $statusPwd = false;
+    //It checking the user-entered values are valid or not, if valid then false otherwise true
+    public $uniqueStatus = false;
+    //It checking the user valid or not, if valid then false otherwise true
+    public $validUser = false;
+    //It is store the OTP which send to user via user-email
+    public $otpValue;
+    //It checking the status of OTP is correct or not
+    public $otpVerify = false;
     /**
     * function getLogin($username, $userpwd)
     *
@@ -26,8 +33,8 @@
     * @return boolean
     */
     function getLogin($username, $userpwd){
-      $this->getname = $username;
-      $this->getpwd = $userpwd;
+      $this->getName = $username;
+      $this->getPwd = $userpwd;
 
       $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'User_DB');
       //$sql = "SELECT userName, userPwd FROM User WHERE userName = '$username' AND userPwd = '$userpwd'";
@@ -41,11 +48,11 @@
             return true;
           }
         }
-        $this->status_pwd = true;
+        $this->statusPwd = true;
         return false;
       }
       else {
-        $this->status_name = true;
+        $this->statusName = true;
         return false;
       }
       $conn->close();
@@ -77,9 +84,8 @@
      * This function first get the data from 'FORM' and then check the username and user-password already exist or not,
      * if exist then it will not store the data into database or if username or user-password does't exist then this
      * function will store the data into database.
-     * @var boolean
+     * @return boolean
      */
-    public $unique_status = false;
     function getRegister($username, $userpwd, $usermobile, $useremail){
       $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'User_DB');
       if ($conn->connect_error) {
@@ -91,7 +97,7 @@
       $result = $conn->query($check_sql);
 
       if ($result->num_rows > 0) {
-        $this->unique_status = true;
+        $this->uniqueStatus = true;
         return false;
       }
       else{
@@ -100,7 +106,7 @@
 
         if($conn->query($sql) === TRUE) {
           //echo "New record created successfully";
-          $this->unique_status = false;
+          $this->uniqueStatus = false;
           return true;
         }
         else{
@@ -134,14 +140,13 @@
      * if not available the it return false, if available then it updated the user new-password.
      * @return boolean
      */
-    public $valid_user = false;
-    function forgotPwd($name, $cpwd, $newpwd){
+    function forgotPwd($name, $currentpwd, $newpwd){
       $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'User_DB');
       if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
       }
 
-      $get = "SELECT userName FROM User WHERE UserPwd = '$cpwd'";
+      $get = "SELECT userName FROM User WHERE UserPwd = '$currentpwd'";
       $result = $conn->query($get);
 
       if ($result->num_rows > 0) {
@@ -151,26 +156,31 @@
             break;
           }
         }*/
-        $post = "UPDATE User SET userPwd = '$newpwd' WHERE userName = '$name' AND userPwd = '$cpwd'";
+        $post = "UPDATE User SET userPwd = '$newpwd' WHERE userName = '$name' AND userPwd = '$currentpwd'";
         if ($conn->query($post) === TRUE) {
           //echo "Record updated successfully";
-          $this->valid_user = false;
+          $this->validUser = false;
           return true;
         }
         else {
           //echo "Error updating record: " . $conn->error;
-          $this->valid_user = true;
+          $this->validUser = true;
           return false;
         }
       }
       else {
-        $this->valid_user = true;
+        $this->validUser = true;
         return false;
       }
       $conn->close();
     }
 
-    public $otpStatus;
+    /**
+     * function otpSend($name)
+     *
+     * @param [string] $name
+     * @return boolean
+     */
     function otpSend($name){
       $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'User_DB');
       if ($conn->connect_error) {
@@ -184,7 +194,7 @@
         if($name === $row["userName"]){
           $email = $row["userEmail"];
           $otp = rand(100000, 999999);
-          $this->otpStatus = $otp;
+          $this->otpValue = $otp;
 
           $mail = new PHPMailer();
           $mail->isSMTP();
@@ -203,27 +213,25 @@
           $mail->isHTML(TRUE);
           $mail->Body = "<b>Mail content:</b> Your OTP => $otp";
           $mail->send();
-          if($mail->send()){
-            //echo "<h3>MESSAGE SENT!!!</h3>";
-          }
-          else{
-            //echo "Error!!!";
-          }
 
-
-
-          $this->valid_user = false;
+          $this->validUser = false;
           return true;
         }
       }
       else {
-        $this->valid_user = true;
+        $this->validUser = true;
         return false;
       }
       $conn->close();
     }
 
-    public $otpVerify = false;
+    /**
+     * function confirmPwd($name, $newpwd)
+     *
+     * @param [string] $name
+     * @param [string] $newpwd
+     * @return boolean
+     */
     function confirmPwd($name, $newpwd){
       $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'User_DB');
       if ($conn->connect_error) {
@@ -243,22 +251,29 @@
         $post = "UPDATE User SET userPwd = '$newpwd' WHERE userName = '$name'";
         if ($conn->query($post) === TRUE) {
           //echo "Record updated successfully";
-          $this->valid_user = false;
+          $this->validUser = false;
           return true;
         }
         else {
           //echo "Error updating record: " . $conn->error;
-          $this->valid_user = true;
+          $this->validUser = true;
           return false;
         }
       }
       else {
-        $this->valid_user = true;
+        $this->validUser = true;
         return false;
       }
       $conn->close();
     }
 
+    /**
+     * function deleteUser($name, $pwd)
+     *
+     * @param [string] $name
+     * @param [string] $pwd
+     * @return boolean
+     */
     function deleteUser($name, $pwd){
       $conn = new mysqli("localhost", 'root', 'Abhi4531@my', 'User_DB');
       if ($conn->connect_error) {

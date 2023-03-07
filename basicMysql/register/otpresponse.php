@@ -18,7 +18,7 @@
 		<?php include "../../style.css" ?>
 	</style>
 
-  <script src="../validity.js?newversion"></script>
+  <script src="../../validity.js?newversion"></script>
   <script type="text/javascript">
     reg_obj = new Validity();
     function newPassword(){
@@ -50,11 +50,7 @@
 			<dd>
         <input type="text" name="otp" id="otp" required placeholder="Enter OTP">
         <span>
-          <?php
-            if(isset($_SESSION['otp_status']) && $_SESSION['otp_status']){
-              echo "Invalid OTP!!!";
-            }
-          ?>
+          <?php if(isset($_SESSION['otp_status']) && $_SESSION['otp_status']){ echo "Invalid OTP!!!"; } ?>
         </span>
       </dd>
 
@@ -79,8 +75,3 @@
 	</form>
 </body>
 </html>
-<?php
-  // if(!isset($_SESSION['login_user'])){
-  //   session_unset();
-  // }
-?>
