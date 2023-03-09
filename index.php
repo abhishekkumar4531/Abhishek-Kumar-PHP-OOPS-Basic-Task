@@ -15,7 +15,7 @@
 <body>
   <?php
   //Link the rootClass.php file where RootClass is available.
-  require("rootClass.php");
+  require 'rootClass.php';
 
   //This varible is checking the current status of a user like user log-in or log-out.
   global $status;

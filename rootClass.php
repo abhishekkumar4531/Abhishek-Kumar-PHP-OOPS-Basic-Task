@@ -1,6 +1,6 @@
 <?php
 //vendor is folder realted to composer and here used for 'Guzzle'
-require("vendor/autoload.php");
+require 'vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 
 //Client is a class which coming from GuzzleHttp and Guzzle used it for email validation.
@@ -103,7 +103,7 @@ class RootClass{
     $response = $client->request('GET', 'email_verification/check?email='. $user_email,
     ['headers' => [
     'Content-Type' => 'text/plain',
-    'apikey' => '3ti1A2XST7POC3bhKnPwNaCYsRSfLsOf']
+    'apikey' => 'sihInzvJndeIb5U9sLoI1CJdWAUiwzpU']
     ]);
 
     $verified_data = $response->getBody();
