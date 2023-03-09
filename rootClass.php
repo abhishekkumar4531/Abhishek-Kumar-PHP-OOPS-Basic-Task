@@ -1,6 +1,6 @@
 <?php
 //vendor is folder realted to composer and here used for 'Guzzle'
-require("vendor/autoload.php");
+require 'vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 
 //Client is a class which coming from GuzzleHttp and Guzzle used it for email validation.

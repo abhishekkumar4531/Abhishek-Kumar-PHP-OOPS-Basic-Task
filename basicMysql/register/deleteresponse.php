@@ -1,6 +1,6 @@
 <?php
   session_start();
-  require("../mysqlClass.php");
+  require '../mysqlClass.php';
 
   if(isset($_POST['sendOtp'])){
     $delete_obj = new MysqlMethods();
